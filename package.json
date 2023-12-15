@@ -1,4 +1,5 @@
 {
+  "homepage": "https://SarJ2004.github.io/TicTacToe-Mobile",
   "name": "tic-tac-toe!",
   "version": "1.0.0",
   "description": "",
@@ -9,6 +10,8 @@
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +24,7 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
+    "gh-pages": "^6.1.0",
     "prettier": "^3.1.1",
     "vite": "^5.0.9"
   },
