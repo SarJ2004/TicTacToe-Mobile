@@ -1,7 +1,8 @@
 {
+  
   "name": "tic-tac-toe!",
   "version": "1.0.0",
-  "homepage": "https://SarJ2004.github.io/TicTacToe-Mobile",
+  
   "description": "",
   "main": "index.js",
   "scripts": {
