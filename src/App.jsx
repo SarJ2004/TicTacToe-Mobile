@@ -63,9 +63,12 @@ function Board({ xIsNext, squares, onPlay }) {
   //In React, it’s conventional to use onSomething names for props which represent events and handleSomething for the function definitions which handle those events.
 
   const winner = findWinner(squares); //returns either X or O or null
+  const draw = checkDraw(squares);
   let status;
   if (winner) {
     status = "Winner: " + winner + " !🥇";
+  } else if (draw) {
+    status = "Draw!";
   } else {
     status = "Next Player: " + (xIsNext ? "❌" : "⭕");
   }
@@ -162,4 +165,33 @@ function findWinner(squares) {
     }
   }
   return null;
+}
+
+function checkDraw(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  let isDraw = true;
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (
+      (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) ||
+      !squares[a] ||
+      !squares[b] ||
+      !squares[c]
+    ) {
+      isDraw = false;
+    }
+  }
+  if (isDraw === true) {
+    return isDraw;
+  }
+  return false;
 }
