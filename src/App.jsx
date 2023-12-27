@@ -135,15 +135,31 @@ export default function Game() {
     //alternating between true and false for odd and even steps of moves
   }
 
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = "◀️" + move;
+    } else {
+      description = "🔁";
+    }
+    return (
+      <li key={move} id={move}>
+        {/* we need to add id to each rendered list to diffrerentiate  it from its siblings */}
+        <button onClick={() => jumpTo(move)} className="history">
+          {description}
+        </button>
+      </li>
+    );
+  });
+
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
+
       <div className="game-info">
-        <button onClick={() => jumpTo(0)} className="history">
-          🔁
-        </button>
+        <ul>{moves}</ul>
       </div>
     </div>
   );

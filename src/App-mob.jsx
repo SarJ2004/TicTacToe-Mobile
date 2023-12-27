@@ -63,11 +63,20 @@ function Board({ xIsNext, squares, onPlay }) {
   //In React, it’s conventional to use onSomething names for props which represent events and handleSomething for the function definitions which handle those events.
 
   const winner = findWinner(squares); //returns either X or O or null
+  const draw = checkDraw(squares);
+
   let status;
+  let winningSquares = document.getElementsByClassName("square");
   if (winner) {
-    status = "Winner: " + winner + " !🥇";
+    status = "Winner: " + winner[0] + " !🥇";
+    winner[1].map((i) => winningSquares[i].classList.add("win-square"));
+  } else if (draw) {
+    status = "Draw!";
   } else {
     status = "Next Player: " + (xIsNext ? "❌" : "⭕");
+    for (let winningSquare of winningSquares) {
+      winningSquare.classList.remove("win-square");
+    }
   }
 
   return (
@@ -126,56 +135,60 @@ export default function Game() {
     //alternating between true and false for odd and even steps of moves
   }
 
-  const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = "◀️" + move;
-    } else {
-      description = "🔁";
-    }
-    return (
-      <li key={move}>
-        {/* we need to add id to each rendered list to diffrerentiate  it from its siblings */}
-        <button onClick={() => jumpTo(move)} className="history">
-          {description}
-        </button>
-      </li>
-    );
-  });
-
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <p className="rewind">History</p>
-        <ul>{moves}</ul>
+        <button onClick={() => jumpTo(0)} className="history">
+          🔁
+        </button>
       </div>
     </div>
   );
 }
 
+const lines = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 function findWinner(squares) {
   //we will now have to write code for when the game is won, and there are no more turns to make
   //this function will take an array of 9 squares, find the winner and then return "X", "O" or null.
   //below are the possible configurations in which a win can be achieved
   //array on favourable indices
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return [squares[a], lines[i]];
     }
   }
   return null;
+}
+
+function checkDraw(squares) {
+  let isDraw = true;
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (
+      (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) ||
+      !squares[a] ||
+      !squares[b] ||
+      !squares[c]
+    ) {
+      isDraw = false;
+    }
+  }
+  if (isDraw === true) {
+    return isDraw;
+  }
+  return false;
 }

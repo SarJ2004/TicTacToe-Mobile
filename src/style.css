@@ -10,21 +10,29 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(41, 41, 41);
+    background-image: url('./ttc.jpeg');
+    background-position: center;
+    background-size: cover;
 }
 
 .square {
-    background-color: white;
-    border: 1px solid #b700ff;
+    background-color: transparent;
+    border: 2px solid transparent;
+    backdrop-filter: blur(10px);
     outline: none;
     padding: 2rem;
-    background-image: linear-gradient(black, rgb(28, 27, 27));
+    /* background-image: linear-gradient(black, rgb(28, 27, 27)); */
+    /* border: 2px inset rgb(88, 9, 100); */
     color: white;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     border-radius: 5px;
-    box-shadow: 10px 5px 10px black;
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.73), 10px 5px 10px rgba(116, 0, 134, 0.605) inset;
+    -webkit-backdrop-filter: blur(10px);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 90px;
     height: 100px;
     cursor: pointer;
@@ -64,8 +72,9 @@ body {
     font-size: 2rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
-    border: 5px double rgb(183, 0, 255);
-    background-color: black;
+    /* border: 5px double rgb(183, 0, 255); */
+    background-color: rgba(68, 0, 113, 0.626);
+
     padding: 1rem;
     text-align: center;
     border-radius: 10px;
@@ -74,26 +83,29 @@ body {
 
 .game {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
 
 }
 
-
+.game-board {}
 
 .history {
     padding: .5rem;
-    background-color: rgb(41, 41, 41);
+    background-color: rgba(157, 54, 225, 0.579);
+    /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.651) inset; */
+    /* opacity: 70%; */
     outline: none;
-    border: 1px solid rgb(183, 0, 255);
-    font-size: 2rem;
+    border: 3px solid white;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 100px 1px rgb(51, 1, 103);
     color: white;
     width: 5rem;
     border-radius: 5px;
     cursor: pointer;
     transition: all 100ms ease-in-out;
-    background-image: linear-gradient(black, rgb(35, 35, 35));
+    -webkit-backdrop-filter: blur(5px);
     transition: all 100ms ease-in-out;
     user-select: none;
     -moz-user-select: none;
@@ -104,10 +116,24 @@ body {
     tap-highlight-color: transparent;
 }
 
+li {
+    list-style-type: none;
+}
+
+ul {
+    gap: .3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 190px;
+    flex-wrap: wrap;
+}
+
 
 .history:active {
     scale: .95;
-    box-shadow: 2px 2px 2px rgb(59, 40, 40);
+
 }
 
 .win-square {
