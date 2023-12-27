@@ -1,6 +1,9 @@
 node_modules/
-
 .env
 .DS_Store
 coverage/
 .vscode/
+src/dist
+build/
+.firebase/
+.git/
